@@ -57,6 +57,7 @@ class XMemTracker(MaskTracking):
         processor.set_all_labels(range(1, num_objects))
         # preprocess input mask
         input_mask = index_numpy_to_one_hot_torch(input_mask, num_objects)
+        input_mask = input_mask[1:]
         input_mask.to(self.device)
         results = []
         # track input objects' masks
@@ -68,8 +69,8 @@ class XMemTracker(MaskTracking):
             # inference model on specific frame
             if i == 0:
                 print(f"frame is cuda: {frame.is_cuda}")
-                print(f"mask is cuda: {input_mask[1:].is_cuda}")
-                prediction = processor.step(frame, input_mask[1:])
+                print(f"mask is cuda: {input_mask.is_cuda}")
+                prediction = processor.step(frame, input_mask)
             else:
                 prediction = processor.step(frame)
             # postprocess prediction
