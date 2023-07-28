@@ -17,8 +17,6 @@ load_dotenv("supervisely_integration/serve/debug.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
 weights_location_path = "/weights/XMem.pth"
-# for debug
-# weights_location_path = "./weights/XMem.pth"
 
 class XMemTracker(MaskTracking):
     def load_on_device(
@@ -32,14 +30,14 @@ class XMemTracker(MaskTracking):
         # define model configuration
         self.config = {
             "top_k": 30,
-            "mem_every": 10,
+            "mem_every": 5,
             "deep_update_every": -1,
             "enable_long_term": True,
             "enable_long_term_count_usage": True,
             "num_prototypes": 128,
             "min_mid_term_frames": 5,
             "max_mid_term_frames": 10,
-            "max_long_term_elements": 30000,
+            "max_long_term_elements": 10000,
         }
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
