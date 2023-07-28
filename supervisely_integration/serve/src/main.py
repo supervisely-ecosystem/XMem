@@ -16,9 +16,9 @@ from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index
 load_dotenv("supervisely_integration/serve/debug.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
-# weights_location_path = "/weights/XMem.pth"
+weights_location_path = "/weights/XMem.pth"
 # for debug
-weights_location_path = "./weights/XMem.pth"
+# weights_location_path = "./weights/XMem.pth"
 
 class XMemTracker(MaskTracking):
     def load_on_device(
@@ -73,8 +73,11 @@ class XMemTracker(MaskTracking):
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
                 # preprocess frame
-                frame = np.resize(frame, (resized_height, resized_width, 3))
                 frame = frame.transpose(2, 0, 1)
+                frame = torch.from_numpy(frame)
+                frame = torch.unsqueeze(frame, 0)
+                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
+                frame = frame.squeeze().numpy()
                 frame = torch.from_numpy(frame).float().to(self.device) / 255
                 frame = im_normalization(frame)
                 # inference model on specific frame
@@ -91,7 +94,7 @@ class XMemTracker(MaskTracking):
                 prediction = torch.from_numpy(prediction)
                 prediction = torch.unsqueeze(prediction, 0)
                 prediction = torch.unsqueeze(prediction, 0)
-                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
+                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="bilinear")
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
