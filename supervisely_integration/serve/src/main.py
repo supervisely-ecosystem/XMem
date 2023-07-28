@@ -43,6 +43,7 @@ class XMemTracker(MaskTracking):
         }
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
+        self.model.to(self.device)
 
     def predict(
             self,
