@@ -59,23 +59,22 @@ class XMemTracker(MaskTracking):
         input_mask.to(self.device)
         results = []
         # track input objects' masks
-        with torch.cuda.amp.autocast(enabled=True):
-            for i, frame in enumerate(frames):
-                # preprocess frame
-                frame = frame.transpose(2, 0, 1)
-                frame = torch.from_numpy(frame).float().to(self.device) / 255
-                frame = im_normalization(frame)
-                # inference model on specific frame
-                if i == 0:
-                    prediction = processor.step(frame, input_mask[1:])
-                else:
-                    prediction = processor.step(frame)
-                # postprocess prediction
-                prediction = torch_prob_to_numpy_mask(prediction)
-                # save predicted mask
-                results.append(prediction)
-                # update progress bar
-                self.video_interface._notify(task="mask tracking")
+        for i, frame in enumerate(frames):
+            # preprocess frame
+            frame = frame.transpose(2, 0, 1)
+            frame = torch.from_numpy(frame).float().to(self.device) / 255
+            frame = im_normalization(frame)
+            # inference model on specific frame
+            if i == 0:
+                prediction = processor.step(frame, input_mask[1:])
+            else:
+                prediction = processor.step(frame)
+            # postprocess prediction
+            prediction = torch_prob_to_numpy_mask(prediction)
+            # save predicted mask
+            results.append(prediction)
+            # update progress bar
+            self.video_interface._notify(task="mask tracking")
         return results
 
 
