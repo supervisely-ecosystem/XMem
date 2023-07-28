@@ -65,9 +65,10 @@ class XMemTracker(MaskTracking):
             frame = frame.transpose(2, 0, 1)
             frame = torch.from_numpy(frame).float().to(self.device) / 255
             frame = im_normalization(frame)
-            frame.to(self.device)
             # inference model on specific frame
             if i == 0:
+                print(f"frame is cuda: {frame.is_cuda}")
+                print(f"mask is cuda: {input_mask[1:].is_cuda}")
                 prediction = processor.step(frame, input_mask[1:])
             else:
                 prediction = processor.step(frame)
