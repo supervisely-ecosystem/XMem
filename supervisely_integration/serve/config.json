@@ -15,7 +15,8 @@
     "task_location": "application_sessions",
     "isolate": true,
     "headless": true,
-    "need_gpu": true,
+    "need_gpu": false,
+    "gpu": "preferred",
     "instance_version": "6.7.40",
     "session_tags": [
         "sly_video_tracking"
