@@ -42,8 +42,6 @@ class XMemTracker(MaskTracking):
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
-        # model quantization
-        self.model.half()
 
     def predict(
             self,
@@ -55,12 +53,11 @@ class XMemTracker(MaskTracking):
         # load processor
         processor = InferenceCore(self.model, config=self.config)
         processor.set_all_labels(range(1, num_objects))
-        # resize frames and input mask
+        # resize input mask
         original_width, original_height = frames[0].shape[1], frames[0].shape[0]
         scaler = min(original_width, original_height) / 480
         resized_width = int(original_width / scaler)
         resized_height = int(original_height / scaler)
-        # input_mask = np.resize(input_mask, (resized_height, resized_width))
         input_mask = torch.from_numpy(input_mask)
         input_mask = torch.unsqueeze(input_mask, 0)
         input_mask = torch.unsqueeze(input_mask, 0)
