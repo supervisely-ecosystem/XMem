@@ -65,6 +65,7 @@ class XMemTracker(MaskTracking):
             frame = frame.transpose(2, 0, 1)
             frame = torch.from_numpy(frame).float().to(self.device) / 255
             frame = im_normalization(frame)
+            frame.to(self.device)
             # inference model on specific frame
             if i == 0:
                 prediction = processor.step(frame, input_mask[1:])
