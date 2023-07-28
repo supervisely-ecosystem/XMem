@@ -15,10 +15,10 @@ from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index
 
 load_dotenv("supervisely_integration/serve/debug.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
-if sly.is_production():
-    weights_location_path = "/weights/XMem.pth"
-else:
-    weights_location_path = "weights/XMem.pth"
+
+# weights_location_path = "/weights/XMem.pth"
+# for debug
+weights_location_path = "./weights/XMem.pth"
 
 class XMemTracker(MaskTracking):
     def load_on_device(
@@ -32,20 +32,20 @@ class XMemTracker(MaskTracking):
         # define model configuration (default hyperparameters)
         self.config = {
             "top_k": 30,
-            "mem_every": 3,
+            "mem_every": 5,
             "deep_update_every": -1,
             "enable_long_term": True,
             "enable_long_term_count_usage": True,
             "num_prototypes": 128,
-            "min_mid_term_frames": 1,
-            "max_mid_term_frames": 1,
+            "min_mid_term_frames": 5,
+            "max_mid_term_frames": 10,
             "max_long_term_elements": 10000,
         }
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
         # model quantization
-        self.model.half()
+        # self.model.half()
 
     def predict(
             self,
@@ -57,11 +57,23 @@ class XMemTracker(MaskTracking):
         # load processor
         processor = InferenceCore(self.model, config=self.config)
         processor.set_all_labels(range(1, num_objects))
+        # resize frames and input mask
+        original_width, original_height = frames[0].shape[1], frames[0].shape[0]
+        scaler = min(original_width, original_height) / 480
+        resized_width = int(original_width / scaler)
+        resized_height = int(original_height / scaler)
+        # input_mask = np.resize(input_mask, (resized_height, resized_width))
+        input_mask = torch.from_numpy(input_mask)
+        input_mask = torch.unsqueeze(input_mask, 0)
+        input_mask = torch.unsqueeze(input_mask, 0)
+        input_mask = torch.nn.functional.interpolate(input_mask, (resized_height, resized_width), mode="nearest")
+        input_mask = input_mask.squeeze().numpy()
         results = []
         # track input objects' masks
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
                 # preprocess frame
+                frame = np.resize(frame, (resized_height, resized_width, 3))
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame).float().to(self.device) / 255
                 frame = im_normalization(frame)
@@ -76,6 +88,11 @@ class XMemTracker(MaskTracking):
                     prediction = processor.step(frame)
                 # postprocess prediction
                 prediction = torch_prob_to_numpy_mask(prediction)
+                prediction = torch.from_numpy(prediction)
+                prediction = torch.unsqueeze(prediction, 0)
+                prediction = torch.unsqueeze(prediction, 0)
+                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
+                prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
                 # update progress bar
