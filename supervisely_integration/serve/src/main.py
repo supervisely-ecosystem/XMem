@@ -94,7 +94,7 @@ class XMemTracker(MaskTracking):
                 prediction = torch.from_numpy(prediction)
                 prediction = torch.unsqueeze(prediction, 0)
                 prediction = torch.unsqueeze(prediction, 0)
-                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="bilinear")
+                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
