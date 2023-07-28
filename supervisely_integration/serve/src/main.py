@@ -39,13 +39,13 @@ class XMemTracker(MaskTracking):
             "num_prototypes": 128,
             "min_mid_term_frames": 5,
             "max_mid_term_frames": 10,
-            "max_long_term_elements": 10000,
+            "max_long_term_elements": 15000,
         }
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
         # model quantization
-        # self.model.half()
+        self.model.half()
 
     def predict(
             self,
