@@ -57,7 +57,6 @@ class XMemTracker(MaskTracking):
         processor.set_all_labels(range(1, num_objects))
         results = []
         # track input objects' masks
-        print("without autocast")
         for i, frame in enumerate(frames):
             # preprocess frame
             frame = frame.transpose(2, 0, 1)
@@ -69,8 +68,6 @@ class XMemTracker(MaskTracking):
                 input_mask = index_numpy_to_one_hot_torch(input_mask, num_objects)
                 input_mask = input_mask[1:]
                 input_mask = input_mask.to(self.device)
-                print(f"frame is cuda: {frame.is_cuda}")
-                print(f"mask is cuda: {input_mask.is_cuda}")
                 prediction = processor.step(frame, input_mask)
             else:
                 prediction = processor.step(frame)
