@@ -32,13 +32,13 @@ class XMemTracker(MaskTracking):
         # define model configuration (default hyperparameters)
         self.config = {
             "top_k": 30,
-            "mem_every": 5,
+            "mem_every": 3,
             "deep_update_every": -1,
             "enable_long_term": True,
             "enable_long_term_count_usage": True,
             "num_prototypes": 128,
             "min_mid_term_frames": 1,
-            "max_mid_term_frames": 5,
+            "max_mid_term_frames": 1,
             "max_long_term_elements": 10000,
         }
         # build model
