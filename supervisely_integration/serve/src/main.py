@@ -29,17 +29,17 @@ class XMemTracker(MaskTracking):
         self.device = torch.device(device)
         # disable gradient calculation
         torch.set_grad_enabled(False)
-        # define model configuration (default hyperparameters)
+        # define model configuration
         self.config = {
             "top_k": 30,
-            "mem_every": 5,
+            "mem_every": 10,
             "deep_update_every": -1,
             "enable_long_term": True,
             "enable_long_term_count_usage": True,
             "num_prototypes": 128,
             "min_mid_term_frames": 5,
             "max_mid_term_frames": 10,
-            "max_long_term_elements": 15000,
+            "max_long_term_elements": 30000,
         }
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
