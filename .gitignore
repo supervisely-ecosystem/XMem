@@ -1,8 +1,8 @@
 log/
 saves
 saves/
+weights/
 output/
-.vscode/
 workspace/
 run*.sh
 

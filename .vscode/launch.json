@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/supervisely_integration/serve/src/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "LOG_LEVEL": "DEBUG",
+            }
+        },
+        {
+            "name": "Advanced Debug in Supervisely platform",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:model.app",
+                "--app-dir",
+                "./supervisely_integration/serve/src",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
+                "--ws",
+                "websockets"
+            ],
+            "jinja": true,
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/supervisely_integration/serve/src:${PYTHONPATH}",
+                "LOG_LEVEL": "DEBUG",
+                "ENV": "production",
+                "DEBUG_WITH_SLY_NET": "1",
+                "SLY_APP_DATA_DIR": "${workspaceFolder}/app_data"
+            }
+        }
+    ]
+}
