@@ -53,11 +53,15 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 ![](https://github.com/supervisely-ecosystem/XMem/assets/12828725/68cd8c59-c2ff-47d6-bf71-072ea33ed9a3)
 
+<br>
+
 <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/xmem/supervisely_integration/serve" src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/0e62d1dc-4d1f-4014-a188-29be4eff9d14" width="300px" style='padding-bottom: 20px'/> 
 
 2. Or you can run it from the **Neural Networks** page from the category **Videos** -> **Segmentation & tracking**.
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/525e2fbb-e9ee-4393-8c18-324498a0fa4a" width="400"/>
+
+<br>
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/7d71e734-7e31-42b5-969e-34b3adf07204" width="300"/>  
 
