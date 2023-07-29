@@ -11,6 +11,7 @@ from model.network import XMem
 from inference.inference_core import InferenceCore
 from dataset.range_transform import im_normalization
 from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index_numpy_to_one_hot_torch
+import gc
 
 
 load_dotenv("supervisely_integration/serve/debug.env")
@@ -50,8 +51,6 @@ class XMemTracker(MaskTracking):
             frames: List[np.ndarray],
             input_mask: np.ndarray,
     ):
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
         # object IDs should be consecutive and start from 1 (0 represents the background)
         num_objects = len(np.unique(input_mask))
         # load processor
@@ -100,6 +99,10 @@ class XMemTracker(MaskTracking):
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
+                # free unused GPU memory
+                if torch.cuda.is_available():
+                    gc.collect()
+                    torch.cuda.empty_cache()
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
         return results
