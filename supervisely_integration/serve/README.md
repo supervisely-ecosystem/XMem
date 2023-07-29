@@ -18,8 +18,8 @@ State-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Vid
 [![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/XMem/supervisely_integration/serve)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/XMem)
-[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/supervisely_integration/serve.png)](https://supervise.ly)
-[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/supervisely_integration/serve.png)](https://supervise.ly)
+[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/xmem/supervisely_integration/serve.png)](https://supervise.ly)
+[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/xmem/supervisely_integration/serve.png)](https://supervise.ly)
 
 </div>
 
