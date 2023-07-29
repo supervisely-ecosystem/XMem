@@ -84,6 +84,9 @@ class XMemTracker(MaskTracking):
                     prediction = processor.step(frame, input_mask)
                 else:
                     prediction = processor.step(frame)
+                # remove frame and mask from GPU
+                input_mask.cpu()
+                frame.cpu()
                 # postprocess prediction
                 prediction = torch_prob_to_numpy_mask(prediction)
                 prediction = torch.from_numpy(prediction)
