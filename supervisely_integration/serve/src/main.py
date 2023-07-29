@@ -41,13 +41,13 @@ class XMemTracker(MaskTracking):
         }
         # for debug
         print("Before loading model on GPU:")
-        print(torch.cuda.mem_get_info())
+        print(torch.cuda.mem_get_info()[0] / 1073741824)
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
         # for debug
         print("After loading model on GPU:")
-        print(torch.cuda.mem_get_info())
+        print(torch.cuda.mem_get_info()[0] / 1073741824)
 
     def predict(
             self,
@@ -75,7 +75,7 @@ class XMemTracker(MaskTracking):
             for i, frame in enumerate(frames):
                 # for debug
                 print(f"Frame: {i}")
-                print(torch.cuda.mem_get_info())
+                print(torch.cuda.mem_get_info()[0] / 1073741824)
                 # preprocess frame
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
@@ -93,6 +93,9 @@ class XMemTracker(MaskTracking):
                     prediction = processor.step(frame, input_mask)
                 else:
                     prediction = processor.step(frame)
+                # for debug
+                print("After inference:")
+                print(torch.cuda.mem_get_info()[0] / 1073741824)
                 # remove frame and mask from GPU
                 input_mask.cpu()
                 frame.cpu()
@@ -107,6 +110,9 @@ class XMemTracker(MaskTracking):
                 results.append(prediction)
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
+                # for debug
+                print("In the end:")
+                print(torch.cuda.mem_get_info()[0] / 1073741824)
         return results
 
 
