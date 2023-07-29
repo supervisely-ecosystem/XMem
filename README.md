@@ -1,8 +1,8 @@
 <div align="center" markdown>
 
-<img src="XXX"/>  
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/67188dc4-cc6b-47bd-b62e-d3d2b71ad7ac"/>  
 
-# XMem
+# XMem Video Object Segmentation
 
 state-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Videos Labeling tool
 
@@ -43,9 +43,26 @@ Description from the original [paper](https://arxiv.org/pdf/2207.07115.pdf):
 https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9adf-f2112763fccf.mp4
 >Handling long-term occlusion
 
-
-
 # How To Run
+
+0. This video object segmentation app is started by default in most cases by an instance administrator. If it isn't available in the video labeling tool, you can contact your Supervisely instance admin or run this app by yourself following the steps below.
+
+2. Add [XMem Video Object Segmentation](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/XMem) to your team from Ecosystem.  
+
+<img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/XMem Video Object Segmentation" src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/e74e2bd9-f915-48b1-bb97-ee808326dff5" width="500px" style='padding-bottom: 20px'/> 
+
+2. Run the app from **Neural Networks** page from category **segmentation & tracking videos**.
+
+<img src="XXX"/>  
+
+3. Run app on an agent with `GPU`.
+
+<img src="XXX"/>
+
+4. Use in `Videos Annotator`.
+
+<img src="XXX"/>
+
 
 # How To Use
 
