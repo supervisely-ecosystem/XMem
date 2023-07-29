@@ -39,9 +39,15 @@ class XMemTracker(MaskTracking):
             "max_mid_term_frames": 10,
             "max_long_term_elements": 10000,
         }
+        # for debug
+        print("Before loading model on GPU:")
+        print(torch.cuda.mem_get_info())
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
+        # for debug
+        print("After loading model on GPU:")
+        print(torch.cuda.mem_get_info())
 
     def predict(
             self,
@@ -67,6 +73,9 @@ class XMemTracker(MaskTracking):
         # track input objects' masks
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
+                # for debug
+                print(f"Frame: {i}")
+                print(torch.cuda.mem_get_info())
                 # preprocess frame
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
