@@ -51,17 +51,19 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/xmem/supervisely_integration/serve" src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/e74e2bd9-f915-48b1-bb97-ee808326dff5" width="500px" style='padding-bottom: 20px'/> 
 
-2. Or you can run it from the **Neural Networks** page from category **segmentation & tracking videos**.
+![](https://github.com/supervisely-ecosystem/XMem/assets/12828725/68cd8c59-c2ff-47d6-bf71-072ea33ed9a3)
 
-<img src="XXX"/>  
+2. Or you can run it from the **Neural Networks** page from category **Videos** -> **Segmentation & tracking**.
 
-3. Run app on an agent with `GPU`. For **Community Edition** - users have to run the app on their own GPU computer connected to the platform.
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/525e2fbb-e9ee-4393-8c18-324498a0fa4a" width="400"/>
+
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/7d71e734-7e31-42b5-969e-34b3adf07204" width="300"/>  
+
+3. Run app on an agent with `GPU`. For **Community Edition** - users have to run the app on their own GPU computer connected to the platform. Watch this [video tutorial](https://youtu.be/aO7Zc4kTrVg).
 
 <img src="XXX"/>
 
-4. Segment object with any interactive segmentation model and press `Track` button in `Video Annotator`.
-
-<img src="XXX"/>
+4. Segment the object with any interactive segmentation model (e.g. [Segment Anything](https://ecosystem.supervisely.com/apps/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
 
 
 # XMem model framework
