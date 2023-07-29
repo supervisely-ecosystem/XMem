@@ -27,7 +27,7 @@ State-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Vid
 
 🔥 We have successfully integrated the XMem Long-Term Video Object Segmentation Neural Network into our Supervisely platform.
 
-https://github-production-user-asset-6210df.s3.amazonaws.com/12828725/257010007-c4df4dfc-4c38-4747-bdb6-6cd4ee7f031e.mp4
+https://user-images.githubusercontent.com/12828725/257010007-c4df4dfc-4c38-4747-bdb6-6cd4ee7f031e.mp4
 
 ## Original work:
 
