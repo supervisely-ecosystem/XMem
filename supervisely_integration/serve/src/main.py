@@ -39,21 +39,19 @@ class XMemTracker(MaskTracking):
             "max_mid_term_frames": 10,
             "max_long_term_elements": 10000,
         }
-        # for debug
-        print("Before loading model on GPU:")
-        print(torch.cuda.mem_get_info()[0] / 1073741824)
+        # define size to which input video will be resized
+        self.frame_size = 480
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
-        # for debug
-        print("After loading model on GPU:")
-        print(torch.cuda.mem_get_info()[0] / 1073741824)
 
     def predict(
             self,
             frames: List[np.ndarray],
             input_mask: np.ndarray,
     ):
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         # object IDs should be consecutive and start from 1 (0 represents the background)
         num_objects = len(np.unique(input_mask))
         # load processor
@@ -61,7 +59,7 @@ class XMemTracker(MaskTracking):
         processor.set_all_labels(range(1, num_objects))
         # resize input mask
         original_width, original_height = frames[0].shape[1], frames[0].shape[0]
-        scaler = min(original_width, original_height) / 480
+        scaler = min(original_width, original_height) / self.frame_size
         resized_width = int(original_width / scaler)
         resized_height = int(original_height / scaler)
         input_mask = torch.from_numpy(input_mask)
@@ -93,12 +91,6 @@ class XMemTracker(MaskTracking):
                     prediction = processor.step(frame, input_mask)
                 else:
                     prediction = processor.step(frame)
-                # for debug
-                print("After inference:")
-                print(torch.cuda.mem_get_info()[0] / 1073741824)
-                # remove frame and mask from GPU
-                input_mask.cpu()
-                frame.cpu()
                 # postprocess prediction
                 prediction = torch_prob_to_numpy_mask(prediction)
                 prediction = torch.from_numpy(prediction)
@@ -110,9 +102,6 @@ class XMemTracker(MaskTracking):
                 results.append(prediction)
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
-                # for debug
-                print("In the end:")
-                print(torch.cuda.mem_get_info()[0] / 1073741824)
         return results
 
 
