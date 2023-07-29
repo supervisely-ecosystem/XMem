@@ -29,5 +29,8 @@
     ],
     "TBD_allowed_shapes": [
         "polygon"
-    ]
+    ],
+    "license": {
+        "type": "GPL-3.0"
+    }
 }
