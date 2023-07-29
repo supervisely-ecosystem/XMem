@@ -1,6 +1,3 @@
-![XMem-icon](https://github.com/supervisely-ecosystem/XMem/assets/119248312/bd2d09c8-db8c-4ae5-aec8-1f53f39afdcc)
-![XMem-poster](https://github.com/supervisely-ecosystem/XMem/assets/119248312/67188dc4-cc6b-47bd-b62e-d3d2b71ad7ac)
-
 <div align="center" markdown>
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/67188dc4-cc6b-47bd-b62e-d3d2b71ad7ac"/>  
