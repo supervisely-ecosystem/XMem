@@ -59,11 +59,11 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 2. Or you can run it from the **Neural Networks** page from the category **Videos** -> **Segmentation & tracking**.
 
-<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/525e2fbb-e9ee-4393-8c18-324498a0fa4a" width="400"/>
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/525e2fbb-e9ee-4393-8c18-324498a0fa4a" width="600"/>
 
 <br>
 
-<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/7d71e734-7e31-42b5-969e-34b3adf07204" width="400"/>  
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/7d71e734-7e31-42b5-969e-34b3adf07204" width="600"/>  
 
 3. Run the app on an agent with `GPU`. For **Community Edition** - users have to run the app on their own GPU computer connected to the platform. Watch this [video tutorial](https://youtu.be/aO7Zc4kTrVg).
 
