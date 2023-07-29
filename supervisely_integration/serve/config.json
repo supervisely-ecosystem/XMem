@@ -5,10 +5,10 @@
     "categories": [
         "neural network",
         "videos",
-        "detection & tracking",
+        "segmentation & tracking",
         "serve"
     ],
-    "description": "Track object masks on videos",
+    "description": "Semi-supervised, works with both long and short videos",
     "docker_image": "supervisely/xmem:1.0.0",
     "entrypoint": "python -m uvicorn main:model.app --app-dir ./supervisely_integration/serve/src --host 0.0.0.0 --port 8000 --ws websockets",
     "port": 8000,
@@ -16,17 +16,18 @@
     "icon": "https://github.com/supervisely-ecosystem/XMem/assets/119248312/bd2d09c8-db8c-4ae5-aec8-1f53f39afdcc",
     "icon_cover": true,
     "poster": "https://github.com/supervisely-ecosystem/XMem/assets/119248312/67188dc4-cc6b-47bd-b62e-d3d2b71ad7ac",
-    "isolate": true,
     "headless": true,
-    "need_gpu": false,
-    "gpu": "preferred",
+    "need_gpu": true,
+    "gpu": "required",
     "instance_version": "6.7.40",
     "session_tags": [
         "sly_video_tracking"
     ],
     "community_agent": false,
     "allowed_shapes": [
-        "polygon",
         "bitmap"
+    ],
+    "TBD_allowed_shapes": [
+        "polygon"
     ]
 }
