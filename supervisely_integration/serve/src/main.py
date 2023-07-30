@@ -99,7 +99,7 @@ class XMemTracker(MaskTracking):
                 prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
-                # results.append(prediction)
+                results.append(prediction)
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
         return results
