@@ -101,9 +101,7 @@ class XMemTracker(MaskTracking):
                 # save predicted mask
                 results.append(prediction)
                 # free unused GPU memory
-                if torch.cuda.is_available():
-                    gc.collect()
-                    torch.cuda.empty_cache()
+                processor.clear_memory()
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
         return results
