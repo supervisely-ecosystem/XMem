@@ -43,8 +43,9 @@ class XMemTracker(MaskTracking):
         # define size to which input video will be resized
         self.frame_size = 480
         # build model
-        self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
-        self.model = self.model.to(self.device)
+        # self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
+        # self.model = self.model.to(self.device)
+        self.model = XMem(self.config, weights_location_path).eval().to(self.device)
 
     def predict(
             self,
