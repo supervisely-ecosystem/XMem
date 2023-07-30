@@ -41,7 +41,7 @@ class XMemTracker(MaskTracking):
             "max_long_term_elements": 10000,
         }
         # define resolution to which input video will be resized
-        self.resolution = 320
+        self.resolution = 400
         # build model
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
