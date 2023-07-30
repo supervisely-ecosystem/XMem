@@ -40,12 +40,11 @@ class XMemTracker(MaskTracking):
             "max_mid_term_frames": 10,
             "max_long_term_elements": 10000,
         }
-        # define size to which input video will be resized
-        self.frame_size = 480
+        # define resolution to which input video will be resized
+        self.resolution = 320
         # build model
-        # self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
-        # self.model = self.model.to(self.device)
-        self.model = XMem(self.config, weights_location_path).eval().to(self.device)
+        self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
+        self.model = self.model.to(self.device)
 
     def predict(
             self,
@@ -59,7 +58,7 @@ class XMemTracker(MaskTracking):
         processor.set_all_labels(range(1, num_objects))
         # resize input mask
         original_width, original_height = frames[0].shape[1], frames[0].shape[0]
-        scaler = min(original_width, original_height) / self.frame_size
+        scaler = min(original_width, original_height) / self.resolution
         resized_width = int(original_width / scaler)
         resized_height = int(original_height / scaler)
         input_mask = torch.from_numpy(input_mask)
@@ -71,9 +70,6 @@ class XMemTracker(MaskTracking):
         # track input objects' masks
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
-                # for debug
-                print(f"Frame: {i}")
-                print(torch.cuda.mem_get_info()[0] / 1073741824)
                 # preprocess frame
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
@@ -90,7 +86,12 @@ class XMemTracker(MaskTracking):
                     input_mask = input_mask.to(self.device)
                     prediction = processor.step(frame, input_mask)
                 else:
+                    # for debug
+                    print("Before step:")
+                    print(torch.cuda.mem_get_info()[0] / 1073741824)
                     prediction = processor.step(frame)
+                    print("After step:")
+                    print(torch.cuda.mem_get_info()[0] / 1073741824)
                 # postprocess prediction
                 prediction = torch_prob_to_numpy_mask(prediction)
                 prediction = torch.from_numpy(prediction)
