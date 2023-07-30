@@ -100,8 +100,6 @@ class XMemTracker(MaskTracking):
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
-                # free unused GPU memory
-                processor.clear_memory()
                 # update progress bar
                 self.video_interface._notify(task="mask tracking")
         return results
