@@ -9,7 +9,7 @@ import torch
 from model.network import XMem
 from inference.inference_core import InferenceCore
 from dataset.range_transform import im_normalization
-from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index_numpy_to_one_hot_torch
+from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index_numpy_to_one_hot_torch, image_to_torch
 
 
 load_dotenv("supervisely_integration/serve/debug.env")
@@ -57,27 +57,28 @@ class XMemTracker(MaskTracking):
         processor = InferenceCore(self.model, config=self.config)
         processor.set_all_labels(range(1, num_objects))
         # resize input mask
-        original_width, original_height = frames[0].shape[1], frames[0].shape[0]
-        scaler = min(original_width, original_height) / self.resolution
-        resized_width = int(original_width / scaler)
-        resized_height = int(original_height / scaler)
-        input_mask = torch.from_numpy(input_mask)
-        input_mask = torch.unsqueeze(input_mask, 0)
-        input_mask = torch.unsqueeze(input_mask, 0)
-        input_mask = torch.nn.functional.interpolate(input_mask, (resized_height, resized_width), mode="nearest")
-        input_mask = input_mask.squeeze().numpy()
+        # original_width, original_height = frames[0].shape[1], frames[0].shape[0]
+        # scaler = min(original_width, original_height) / self.resolution
+        # resized_width = int(original_width / scaler)
+        # resized_height = int(original_height / scaler)
+        # input_mask = torch.from_numpy(input_mask)
+        # input_mask = torch.unsqueeze(input_mask, 0)
+        # input_mask = torch.unsqueeze(input_mask, 0)
+        # input_mask = torch.nn.functional.interpolate(input_mask, (resized_height, resized_width), mode="nearest")
+        # input_mask = input_mask.squeeze().numpy()
         results = []
         # track input objects' masks
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
                 # preprocess frame
-                frame = frame.transpose(2, 0, 1)
-                frame = torch.from_numpy(frame)
-                frame = torch.unsqueeze(frame, 0)
-                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
-                frame = frame.squeeze().numpy()
-                frame = torch.from_numpy(frame).float().to(self.device) / 255
-                frame = im_normalization(frame)
+                # frame = frame.transpose(2, 0, 1)
+                # frame = torch.from_numpy(frame)
+                # frame = torch.unsqueeze(frame, 0)
+                # frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
+                # frame = frame.squeeze().numpy()
+                # frame = torch.from_numpy(frame).float().to(self.device) / 255
+                # frame = im_normalization(frame)
+                frame, _ = image_to_torch(frame, device=self.device)
                 # inference model on specific frame
                 if i == 0:
                     # preprocess input mask
@@ -91,11 +92,11 @@ class XMemTracker(MaskTracking):
                     print(torch.cuda.mem_get_info()[0] / 1073741824)
                 # postprocess prediction
                 prediction = torch_prob_to_numpy_mask(prediction)
-                prediction = torch.from_numpy(prediction)
-                prediction = torch.unsqueeze(prediction, 0)
-                prediction = torch.unsqueeze(prediction, 0)
-                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
-                prediction = prediction.squeeze().numpy()
+                # prediction = torch.from_numpy(prediction)
+                # prediction = torch.unsqueeze(prediction, 0)
+                # prediction = torch.unsqueeze(prediction, 0)
+                # prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
+                # prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
                 # update progress bar
