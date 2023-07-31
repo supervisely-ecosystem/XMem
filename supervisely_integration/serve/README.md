@@ -7,12 +7,11 @@
 State-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Videos Labeling tool
 
 <p align="center">
-  <a href="#Original-work">Original work</a> •
-  <a href="#Original-work">Overview</a> •
-  <a href="#How-To-Run">How To Run</a> •
-  <a href="#How-To-Use">How To Use</a> •
-  <a href="#Demo">Demo</a> •
-  <a href="#XMem-model-framework">XMem model framework</a>
+  <a href="#overview">Overview</a> •
+  <a href="#original-work">Original work</a> •
+  <a href="#how-to-run">How To Run</a> •
+  <a href="#xmem-model-framework">XMem model framework</a> •
+  <a href="#citation">Citation</a>
 </p>
 
 [![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/XMem/supervisely_integration/serve)
@@ -29,7 +28,7 @@ State-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Vid
 
 https://user-images.githubusercontent.com/12828725/257010007-c4df4dfc-4c38-4747-bdb6-6cd4ee7f031e.mp4
 
-## Original work:
+# Original work:
 
 Long-Term Video Object Segmentation with an Atkinson-Shiffrin Memory Model
 
@@ -51,23 +50,25 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 1. Go to Ecosystem page and find the app [XMem Video Object Segmentation](https://ecosystem.supervisely.com/apps/xmem/supervisely_integration/serve).  
 
-![](https://github.com/supervisely-ecosystem/XMem/assets/12828725/68cd8c59-c2ff-47d6-bf71-072ea33ed9a3)
+
+<img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/xmem/supervisely_integration/serve" src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/bdcd22bc-b67a-4597-8b1c-4f9baa913717" width="500px" style='padding-bottom: 20px'/> 
 
 <br>
 
-<img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/xmem/supervisely_integration/serve" src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/0e62d1dc-4d1f-4014-a188-29be4eff9d14" width="300px" style='padding-bottom: 20px'/> 
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/b1227abd-ac72-4ef0-b8d3-fb3e186839ed"/>
+
 
 2. Or you can run it from the **Neural Networks** page from the category **Videos** -> **Segmentation & tracking**.
 
-<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/525e2fbb-e9ee-4393-8c18-324498a0fa4a" width="600"/>
-
-<br>
-
-<img src="https://github.com/supervisely-ecosystem/XMem/assets/12828725/7d71e734-7e31-42b5-969e-34b3adf07204" width="600"/>  
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/314789ab-657c-4279-837c-03bc58bc4fb7"/>
 
 3. Run the app on an agent with `GPU`. For **Community Edition** - users have to run the app on their own GPU computer connected to the platform. Watch this [video tutorial](https://youtu.be/aO7Zc4kTrVg).
 
-4. Segment the object with any interactive segmentation model (e.g. [Segment Anything](https://ecosystem.supervisely.com/apps/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/78a4a760-df76-4fcf-a6a0-049fa213e55f"/>
+
+5. Segment the object with any interactive segmentation model (e.g. [Segment Anything](https://ecosystem.supervisely.com/apps/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
+
+<img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/b6dc0f9e-1822-4862-9c65-83aaf629fb05"/>
 
 
 # XMem model framework
