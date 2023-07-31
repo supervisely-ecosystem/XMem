@@ -1,4 +1,4 @@
-supervisely==6.72.84
+supervisely==6.72.87
 --extra-index-url https://download.pytorch.org/whl/cu113
 torch==1.12.1+cu113
 torchvision==0.13.1+cu113

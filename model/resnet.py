@@ -32,9 +32,9 @@ def load_weights_add_extra_dim(target, source_state, extra_dim=1):
     target.load_state_dict(new_dict)
 
 
-model_urls = {
-    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
-    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+model_paths = {
+    'resnet18': '/weights/resnet18.pth',
+    'resnet50': '/weights/resnet50.pth',
 }
 
 
@@ -154,12 +154,12 @@ class ResNet(nn.Module):
 def resnet18(pretrained=True, extra_dim=0):
     model = ResNet(BasicBlock, [2, 2, 2, 2], extra_dim)
     if pretrained:
-        load_weights_add_extra_dim(model, model_zoo.load_url(model_urls['resnet18']), extra_dim)
+        load_weights_add_extra_dim(model, torch.load(model_paths['resnet18']), extra_dim)
     return model
 
 def resnet50(pretrained=True, extra_dim=0):
     model = ResNet(Bottleneck, [3, 4, 6, 3], extra_dim)
     if pretrained:
-        load_weights_add_extra_dim(model, model_zoo.load_url(model_urls['resnet50']), extra_dim)
+        load_weights_add_extra_dim(model, torch.load(model_paths['resnet50']), extra_dim)
     return model
 
