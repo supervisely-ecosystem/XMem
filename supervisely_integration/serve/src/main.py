@@ -6,12 +6,10 @@ from typing import Any, Dict, List
 from supervisely.nn.inference import MaskTracking
 import numpy as np
 import torch
-import torch.nn.functional as F
 from model.network import XMem
 from inference.inference_core import InferenceCore
 from dataset.range_transform import im_normalization
 from inference.interact.interactive_utils import torch_prob_to_numpy_mask, index_numpy_to_one_hot_torch
-import gc
 
 
 load_dotenv("supervisely_integration/serve/debug.env")
@@ -26,9 +24,7 @@ class XMemTracker(MaskTracking):
         device: Literal["cpu", "cuda", "cuda:0", "cuda:1", "cuda:2", "cuda:3"] = "cpu",
     ):
         self.device = torch.device(device)
-        # disable gradient calculation
-        torch.set_grad_enabled(False)
-        # define model configuration
+        # define model configuration (default hyperparameters)
         self.config = {
             "top_k": 30,
             "mem_every": 5,
@@ -51,6 +47,10 @@ class XMemTracker(MaskTracking):
             frames: List[np.ndarray],
             input_mask: np.ndarray,
     ):
+        # disable gradient calculation
+        torch.set_grad_enabled(False)
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         # object IDs should be consecutive and start from 1 (0 represents the background)
         num_objects = len(np.unique(input_mask))
         # load processor
@@ -74,7 +74,7 @@ class XMemTracker(MaskTracking):
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
                 frame = torch.unsqueeze(frame, 0)
-                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
+                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="bilinear")
                 frame = frame.squeeze().numpy()
                 frame = torch.from_numpy(frame).float().to(self.device) / 255
                 frame = im_normalization(frame)
@@ -86,9 +86,6 @@ class XMemTracker(MaskTracking):
                     input_mask = input_mask.to(self.device)
                     prediction = processor.step(frame, input_mask)
                 else:
-                    # for debug
-                    print("Before step:")
-                    print(torch.cuda.mem_get_info()[0] / 1073741824)
                     prediction = processor.step(frame)
                     print("After step:")
                     print(torch.cuda.mem_get_info()[0] / 1073741824)
