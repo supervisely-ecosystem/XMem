@@ -1,4 +1,4 @@
-git+https://github.com/supervisely/supervisely.git@polygon-tracking
+supervisely==6.72.86
 --extra-index-url https://download.pytorch.org/whl/cu113
 torch==1.12.1+cu113
 torchvision==0.13.1+cu113
