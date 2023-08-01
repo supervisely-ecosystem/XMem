@@ -40,13 +40,16 @@ class MyModel(sly.nn.inference.MaskTracking):
         frames: List[np.ndarray],
         input_mask: np.ndarray,
     ) -> List[np.ndarray]:
-        # disable gradient calculation, pass input mask to your model, run it on given list of frames (frame-by-frame), save predictions to a list and update progress bar on each iteration
         # a simple code example
+        # disable gradient calculation
         torch.set_grad_enabled(False)
         results = []
+        # pass input mask to your model, run it on given list of frames (frame-by-frame)
         for frame in frames:
           prediction = self.model(input_mask, frame)
+          # save predictions to a list
           results.append(prediction)
+          # update progress bar on each iteration
           self.video_interface._notify(task="mask tracking")
         return results
 ```
