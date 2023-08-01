@@ -273,8 +273,14 @@ After that:
 
 1. If you develop in a Docker container, you should run the container with `--cap_add=NET_ADMIN` option.
 
-2. Install `sudo apt-get install wireguard iproute2`.
+2. Install `sudo apt-get install wireguard iproute2` or `brew install wireguard-tools` for Mac.
 
 3. Define your `TEAM_ID` in the `debug.env` file. *Actually there are other env variables that is needed, but they are already provided in `./vscode/launch.json` for you.
 
 4. Switch the `launch.json` config to the `Advanced debug in Supervisely platform`:
+
+![Advanced Debug in Supervisely](https://user-images.githubusercontent.com/31512713/224290229-5da93fd2-dc97-4911-abb5-66ce890485a2.png)
+
+5. Run the code.
+
+✅ It will deploy the model in the Supervisely platform as a REST API.
