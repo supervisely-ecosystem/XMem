@@ -22,6 +22,10 @@ To integrate your custom video object segmentation model, you need to subclass *
 The overall structure of the class we will implement looks like this:
 
 ```python
+import supervisely as sly
+import torch
+import numpy as np
+
 class MyModel(sly.nn.inference.MaskTracking):
     def load_on_device(
         self,
@@ -34,7 +38,7 @@ class MyModel(sly.nn.inference.MaskTracking):
     def predict(
         self,
         frames: List[np.ndarray],
-        input_mask: mp.ndarray,
+        input_mask: np.ndarray,
     ) -> List[np.ndarray]:
         # disable gradient calculation, pass input mask to your model, run it on given list of frames (frame-by-frame), save predictions to a list and update progress bar on each iteration
         # a simple code example
