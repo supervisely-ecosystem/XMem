@@ -32,7 +32,7 @@ class MyModel(sly.nn.inference.MaskTracking):
         model_dir: str,
         device: Literal["cpu", "cuda", "cuda:0", "cuda:1", "cuda:2", "cuda:3"] = "cpu",
     ):
-        # initialize model, load weights, load model on the device
+        # initialize model, load weights, load model on device
         pass
 
     def predict(
@@ -51,7 +51,7 @@ class MyModel(sly.nn.inference.MaskTracking):
         return results
 ```
 
-The superclass has a `serve()` method. For running the code on the Supervisely platform, `serve` method should be executed:
+The superclass has a `serve` method. For running the code on the Supervisely platform, `serve` method should be executed:
 
 ```python
 model = MyModel()
