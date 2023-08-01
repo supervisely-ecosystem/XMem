@@ -217,3 +217,7 @@ The core method for model inference. Here we are disabling gradient calculation,
                 self.video_interface._notify(task="mask tracking")
         return results
 ```
+
+{% hint style="info" %}
+It is crucial to disable gradient calculation in predict method, not in load_on_device, because these methods are being executed in different threads, so if you try disabling gradient calculation in load_on_device method, then it will have no effect during inference, which can significantly increase GPU memory consumption.
+{% endhint %}
