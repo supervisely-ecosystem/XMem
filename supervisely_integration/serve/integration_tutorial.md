@@ -96,6 +96,25 @@ code -r .
 
 ### Step-by-step implementation
 
+**Creating necessary files and directories**
+
+After cloning original repo we will create `supervisely_integration` folder, where all code for integration will be stored. There will be 2 directories - `docker` (we will put our Dockerfile here) and `serve` (app directory). Inside `serve` directory we will create `src` subdirectory and put `main.py` file there. Inside `serve` folder we will also create `debug.env` file - it will contain your [team id](https://developer.supervisely.com/getting-started/environment-variables#team_id):
+
+```python
+TEAM_ID=your_team_id
+```
+
+We will also create `requirements.txt` file, where all app dependancies will be stored:
+
+```python
+supervisely==6.72.87
+--extra-index-url https://download.pytorch.org/whl/cu113
+torch==1.12.1+cu113
+torchvision==0.13.1+cu113
+```
+
+Now we can start coding our `main.py` file.
+
 **Defining imports and global variables**
 
 ```python
@@ -268,6 +287,8 @@ First of all it is necessary to create `.vscode` folder and `launch.json` file i
     ]
 }
 ```
+
+You can read more about advanced debug mode [here](https://developer.supervisely.com/app-development/advanced/advanced-debugging).
 
 After that: 
 
