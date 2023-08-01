@@ -228,3 +228,53 @@ When `load_on_device` and `predict` methods are implemented, it is necessary to 
 model = XMemTracker()
 model.serve()
 ```
+
+## Debug in Supervisely platform
+
+Once the code is written, it's time to test it right in the Supervisely platform as a debugging app.
+
+First of all it is necessary to create `.vscode` folder and `launch.json` file inside this folder. Your `launch.json` file should contain the following:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Advanced Debug in Supervisely platform",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:model.app",
+                "--app-dir",
+                "./supervisely_integration/serve/src",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
+                "--ws",
+                "websockets"
+            ],
+            "jinja": true,
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/supervisely_integration/serve/src:${PYTHONPATH}",
+                "LOG_LEVEL": "DEBUG",
+                "ENV": "production",
+                "DEBUG_WITH_SLY_NET": "1",
+                "SLY_APP_DATA_DIR": "${workspaceFolder}/app_data"
+            }
+        }
+    ]
+}
+```
+
+After that: 
+
+1. If you develop in a Docker container, you should run the container with `--cap_add=NET_ADMIN` option.
+
+2. Install `sudo apt-get install wireguard iproute2`.
+
+3. Define your `TEAM_ID` in the `debug.env` file. *Actually there are other env variables that is needed, but they are already provided in `./vscode/launch.json` for you.
+
+4. Switch the `launch.json` config to the `Advanced debug in Supervisely platform`:

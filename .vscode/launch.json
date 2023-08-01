@@ -2,18 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/supervisely_integration/serve/src/main.py",
-            "console": "integratedTerminal",
-            "justMyCode": true,
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}",
-                "LOG_LEVEL": "DEBUG",
-            }
-        },
-        {
             "name": "Advanced Debug in Supervisely platform",
             "type": "python",
             "request": "launch",
