@@ -314,6 +314,8 @@ After advanced debug launch you must be able to debug your app via `Develop & De
 
 [https://github.com/supervisely-ecosystem/XMem/assets/91027877/23198a4d-41cd-4ae7-a4e6-bba72c0da439](https://user-images.githubusercontent.com/91027877/257575433-23198a4d-41cd-4ae7-a4e6-bba72c0da439.mp4)
 
+## Release your code as a Supervisely App.
+
 ### Repository structure
 
 The structure of [our GitHub repository](https://github.com/supervisely-ecosystem/XMem/tree/main) is the following:
@@ -321,165 +323,17 @@ The structure of [our GitHub repository](https://github.com/supervisely-ecosyste
 ```
 ├── LICENSE
 ├── README.md
-├── app_data
-│   └── models
-├── dataset
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-311.pyc
-│   │   └── range_transform.cpython-311.pyc
-│   ├── range_transform.py
-│   ├── reseed.py
-│   ├── static_dataset.py
-│   ├── tps.py
-│   ├── util.py
-│   └── vos_dataset.py
-├── docs
-│   ├── DEMO.md
-│   ├── ECCV-logo.png
-│   ├── FAILURE_CASES.md
-│   ├── GETTING_STARTED.md
-│   ├── INFERENCE.md
-│   ├── PALETTE.md
-│   ├── RESULTS.md
-│   ├── TRAINING.md
-│   ├── icon.png
-│   ├── index.html
-│   └── style.css
+├── app_data\
+├── dataset\
+├── docs\
 ├── eval.py
-├── inference
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-311.pyc
-│   │   ├── inference_core.cpython-311.pyc
-│   │   ├── kv_memory_store.cpython-311.pyc
-│   │   └── memory_manager.cpython-311.pyc
-│   ├── data
-│   │   ├── __init__.py
-│   │   ├── mask_mapper.py
-│   │   ├── test_datasets.py
-│   │   └── video_reader.py
-│   ├── inference_core.py
-│   ├── interact
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-311.pyc
-│   │   │   └── interactive_utils.cpython-311.pyc
-│   │   ├── fbrs
-│   │   │   ├── LICENSE
-│   │   │   ├── __init__.py
-│   │   │   ├── controller.py
-│   │   │   ├── inference
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── clicker.py
-│   │   │   │   ├── evaluation.py
-│   │   │   │   ├── predictors
-│   │   │   │   │   ├── __init__.py
-│   │   │   │   │   ├── base.py
-│   │   │   │   │   ├── brs.py
-│   │   │   │   │   ├── brs_functors.py
-│   │   │   │   │   └── brs_losses.py
-│   │   │   │   ├── transforms
-│   │   │   │   │   ├── __init__.py
-│   │   │   │   │   ├── base.py
-│   │   │   │   │   ├── crops.py
-│   │   │   │   │   ├── flip.py
-│   │   │   │   │   ├── limit_longest_side.py
-│   │   │   │   │   └── zoom_in.py
-│   │   │   │   └── utils.py
-│   │   │   ├── model
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── initializer.py
-│   │   │   │   ├── is_deeplab_model.py
-│   │   │   │   ├── is_hrnet_model.py
-│   │   │   │   ├── losses.py
-│   │   │   │   ├── metrics.py
-│   │   │   │   ├── modeling
-│   │   │   │   │   ├── __init__.py
-│   │   │   │   │   ├── basic_blocks.py
-│   │   │   │   │   ├── deeplab_v3.py
-│   │   │   │   │   ├── hrnet_ocr.py
-│   │   │   │   │   ├── ocr.py
-│   │   │   │   │   ├── resnet.py
-│   │   │   │   │   └── resnetv1b.py
-│   │   │   │   ├── ops.py
-│   │   │   │   └── syncbn
-│   │   │   │       ├── LICENSE
-│   │   │   │       ├── README.md
-│   │   │   │       ├── __init__.py
-│   │   │   │       └── modules
-│   │   │   │           ├── __init__.py
-│   │   │   │           ├── functional
-│   │   │   │           │   ├── __init__.py
-│   │   │   │           │   ├── _csrc.py
-│   │   │   │           │   ├── csrc
-│   │   │   │           │   │   ├── bn.h
-│   │   │   │           │   │   ├── cuda
-│   │   │   │           │   │   │   ├── bn_cuda.cu
-│   │   │   │           │   │   │   ├── common.h
-│   │   │   │           │   │   │   └── ext_lib.h
-│   │   │   │           │   │   └── ext_lib.cpp
-│   │   │   │           │   └── syncbn.py
-│   │   │   │           └── nn
-│   │   │   │               ├── __init__.py
-│   │   │   │               └── syncbn.py
-│   │   │   └── utils
-│   │   │       ├── __init__.py
-│   │   │       ├── cython
-│   │   │       │   ├── __init__.py
-│   │   │       │   ├── _get_dist_maps.pyx
-│   │   │       │   ├── _get_dist_maps.pyxbld
-│   │   │       │   └── dist_maps.py
-│   │   │       ├── misc.py
-│   │   │       └── vis.py
-│   │   ├── fbrs_controller.py
-│   │   ├── gui.py
-│   │   ├── gui_utils.py
-│   │   ├── interaction.py
-│   │   ├── interactive_utils.py
-│   │   ├── resource_manager.py
-│   │   ├── s2m
-│   │   │   ├── __init__.py
-│   │   │   ├── _deeplab.py
-│   │   │   ├── s2m_network.py
-│   │   │   ├── s2m_resnet.py
-│   │   │   └── utils.py
-│   │   ├── s2m_controller.py
-│   │   └── timer.py
-│   ├── kv_memory_store.py
-│   └── memory_manager.py
+├── inference\
 ├── interactive_demo.py
 ├── merge_multi_scale.py
-├── model
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-311.pyc
-│   │   ├── aggregate.cpython-311.pyc
-│   │   ├── cbam.cpython-311.pyc
-│   │   ├── group_modules.cpython-311.pyc
-│   │   ├── memory_util.cpython-311.pyc
-│   │   ├── modules.cpython-311.pyc
-│   │   ├── network.cpython-311.pyc
-│   │   └── resnet.cpython-311.pyc
-│   ├── aggregate.py
-│   ├── cbam.py
-│   ├── group_modules.py
-│   ├── losses.py
-│   ├── memory_util.py
-│   ├── modules.py
-│   ├── network.py
-│   ├── resnet.py
-│   └── trainer.py
+├── model\
 ├── requirements.txt
 ├── requirements_demo.txt
-├── scripts
-│   ├── __init__.py
-│   ├── download_bl30k.py
-│   ├── download_datasets.py
-│   ├── download_models.sh
-│   ├── download_models_demo.sh
-│   ├── expand_long_vid.py
-│   └── resize_youtube.py
+├── scripts\
 ├── supervisely_integration
 │   ├── docker
 │   │   ├── Dockerfile
@@ -492,21 +346,7 @@ The structure of [our GitHub repository](https://github.com/supervisely-ecosyste
 │       └── src
 │           └── main.py
 ├── train.py
-└── util
-    ├── __init__.py
-    ├── __pycache__
-    │   ├── __init__.cpython-311.pyc
-    │   ├── palette.cpython-311.pyc
-    │   └── tensor_util.cpython-311.pyc
-    ├── configuration.py
-    ├── davis_subset.txt
-    ├── image_saver.py
-    ├── load_subset.py
-    ├── log_integrator.py
-    ├── logger.py
-    ├── palette.py
-    ├── tensor_util.py
-    └── yv_subset.txt
+└── util\
 ```
 
 Explanation:
@@ -575,8 +415,6 @@ Here is the explanation for the fields:
 * `port` - port inside the container
 * `headless: true` means that the app has no User Interface
 * `allowed_shapes` - shapes can be tracked with this model. In Supervisely masks can be represented by bitmap and polygon geometries.
-
-## Release your code as a Supervisely App.
 
 Once you've tested the code, it's time to release it into the platform. It can be released as an App that is shared with the all Supervisely community, or as your own private App.
 
