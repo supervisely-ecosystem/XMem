@@ -517,3 +517,61 @@ Explanation:
 * `supervisely_integration/serve/requirements.txt` - all packages needed for debugging 
 * `supervisely_integration/serve/debug.env` - file with variables used for debugging
 * `supervisely_integration/docker` - directory with the custom Dockerfile for this application and the script that builds it and publishes it to the docker registry
+
+### App configuration
+
+App configuration is stored in `config.json` file. A detailed explanation of all possible fields is covered in this [Configuration Tutorial](https://developer.supervisely.com/app-development/basics/app-json-config/config.json). Let's check the config for our current app: 
+
+```json
+{
+    "name": "XMem Video Object Segmentation",
+    "type": "app",
+    "version": "2.0.0",
+    "categories": [
+        "neural network",
+        "videos",
+        "segmentation & tracking",
+        "serve"
+    ],
+    "description": "Semi-supervised, works with both long and short videos",
+    "docker_image": "supervisely/xmem:1.0.1",
+    "entrypoint": "python -m uvicorn main:model.app --app-dir ./supervisely_integration/serve/src --host 0.0.0.0 --port 8000 --ws websockets",
+    "port": 8000,
+    "task_location": "application_sessions",
+    "icon": "https://github.com/supervisely-ecosystem/XMem/assets/119248312/bd2d09c8-db8c-4ae5-aec8-1f53f39afdcc",
+    "icon_cover": true,
+    "poster": "https://github.com/supervisely-ecosystem/XMem/assets/119248312/67188dc4-cc6b-47bd-b62e-d3d2b71ad7ac",
+    "headless": true,
+    "need_gpu": true,
+    "gpu": "required",
+    "instance_version": "6.7.40",
+    "session_tags": [
+        "sly_video_tracking"
+    ],
+    "community_agent": false,
+    "allowed_shapes": [
+        "bitmap",
+        "polygon"
+    ],
+    "license": {
+        "type": "GPL-3.0"
+    }
+}
+```
+
+Here is the explanation for the fields:
+
+* `type` - type of the module in Supervisely Ecosystem
+* `version` - version of Supervisely App Engine. Just keep it by default
+* `name` - the name of the application
+* `description` - the description of the application
+* `categories` - these tags are used to place the application in the correct category in Ecosystem.
+* `session_tags` - these tags will be assigned to every running session of the application. They can be used by other apps to find and filter all running sessions
+* `"need_gpu": true` - should be true if you want to use any `cuda` devices
+*  `"gpu": "required"` - app can be runned on both CPU and GPU devices, but it is recommended to use GPU for higher inference speed
+* `"community_agent": false` - this means that this app can not be run on the agents started by Supervisely team, so users have to connect their own computers and run the app only on their own agents. Only applicable in Community Edition. Enterprise customers use their private instances so they can ignore the current option
+* `docker_image` - Docker container will be started from the defined Docker image, github repository will be downloaded and mounted inside the container.
+* `entrypoint` - the command that starts our application in a container
+* `port` - port inside the container
+* `"headless": true` means that the app has no User Interface
+* `allowed_shapes` - shapes can be tracked with this model. In Supervisely masks can be represented by bitmap and polygon geometries.
