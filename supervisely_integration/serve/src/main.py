@@ -11,6 +11,7 @@ from dataset.range_transform import im_normalization
 from inference.interact.interactive_utils import index_numpy_to_one_hot_torch
 
 
+# for debug, has no effect in production
 load_dotenv("supervisely_integration/serve/debug.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
@@ -22,7 +23,6 @@ class XMemTracker(sly.nn.inference.MaskTracking):
         model_dir: str,
         device: Literal["cpu", "cuda", "cuda:0", "cuda:1", "cuda:2", "cuda:3"] = "cpu",
     ):
-        self.device = torch.device(device)
         # define model configuration (default hyperparameters)
         self.config = {
             "top_k": 30,
@@ -38,6 +38,7 @@ class XMemTracker(sly.nn.inference.MaskTracking):
         # define resolution to which input video will be resized (was taken from original repository)
         self.resolution = 480
         # build model
+        self.device = torch.device(device)
         self.model = XMem(self.config, weights_location_path, map_location=self.device).eval()
         self.model = self.model.to(self.device)
 
@@ -45,7 +46,7 @@ class XMemTracker(sly.nn.inference.MaskTracking):
             self,
             frames: List[np.ndarray],
             input_mask: np.ndarray,
-    ):
+    ) -> List[np.ndarray]:
         # disable gradient calculation
         torch.set_grad_enabled(False)
         # empty cache
