@@ -59,3 +59,34 @@ model.serve()
 ```
 
 The `serve` method deploys your model as a **REST API** service on the Supervisely platform. It means that other applications are able to send requests to your model and get predictions from it.
+
+## XMem video object segmentation model
+
+Now let's implement the class specifically for XMem.
+
+### Getting started
+
+**Step 1.** Prepare `~/supervisely.env` file with credentials. [Learn more here](https://developer.supervisely.com/getting-started/basics-of-authentication#use-.env-file-recommended)
+
+**Step 2.** Clone [repository](https://github.com/hkchengrex/XMem) with source code and create [Virtual Environment](https://docs.python.org/3/library/venv.html).
+
+```bash
+git clone https://github.com/hkchengrex/XMem.git
+cd XMem
+source .venv/bin/activate
+pip3 install pip3 install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
+pip3 install torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
+pip3 install supervisely==6.72.87
+```
+
+**Step 3.** Download model weights.
+```bash
+cd XMem
+wget -P ./weights/ https://github.com/hkchengrex/XMem/releases/download/v1.0/XMem.pth
+```
+
+**Step 4.** Open the repository directory in Visual Studio Code.
+
+```bash
+code -r .
+```
