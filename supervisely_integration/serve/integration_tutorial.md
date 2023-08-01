@@ -51,7 +51,7 @@ The superclass has a `serve()` method. For running the code on the Supervisely p
 
 ```python
 model = MyModel()
-m.serve()
+model.serve()
 ```
 
 The `serve` method deploys your model as a **REST API** service on the Supervisely platform. It means that other applications are able to send requests to your model and get predictions from it.
