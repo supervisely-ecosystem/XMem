@@ -416,6 +416,8 @@ Here is the explanation for the fields:
 * `headless: true` means that the app has no User Interface
 * `allowed_shapes` - shapes can be tracked with this model. In Supervisely masks can be represented by bitmap and polygon geometries.
 
+### App release
+
 Once you've tested the code, it's time to release it into the platform. It can be released as an App that is shared with the all Supervisely community, or as your own private App.
 
 Refer to [How to Release your App](https://developer.supervisely.com/app-development/basics/from-script-to-supervisely-app) for all releasing details. For a private app check also [Private App Tutorial](https://developer.supervisely.com/app-development/basics/add-private-app).
