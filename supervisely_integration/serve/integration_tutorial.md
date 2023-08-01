@@ -567,11 +567,12 @@ Here is the explanation for the fields:
 * `description` - the description of the application
 * `categories` - these tags are used to place the application in the correct category in Ecosystem.
 * `session_tags` - these tags will be assigned to every running session of the application. They can be used by other apps to find and filter all running sessions
-* `"need_gpu": true` - should be true if you want to use any `cuda` devices
-*  `"gpu": "required"` - app can be runned on both CPU and GPU devices, but it is recommended to use GPU for higher inference speed
-* `"community_agent": false` - this means that this app can not be run on the agents started by Supervisely team, so users have to connect their own computers and run the app only on their own agents. Only applicable in Community Edition. Enterprise customers use their private instances so they can ignore the current option
+* `need_gpu: true` - should be true if you want to use any `cuda` devices
+*  `gpu: required` - app can be runned on both CPU and GPU devices, but it is recommended to use GPU for higher inference speed
+* `community_agent: false` - this means that this app can not be run on the agents started by Supervisely team, so users have to connect their own computers and run the app only on their own agents. Only applicable in Community Edition. Enterprise customers use their private instances so they can ignore the current option
 * `docker_image` - Docker container will be started from the defined Docker image, github repository will be downloaded and mounted inside the container.
 * `entrypoint` - the command that starts our application in a container
 * `port` - port inside the container
-* `"headless": true` means that the app has no User Interface
+* `headless: true` means that the app has no User Interface
 * `allowed_shapes` - shapes can be tracked with this model. In Supervisely masks can be represented by bitmap and polygon geometries.
+
