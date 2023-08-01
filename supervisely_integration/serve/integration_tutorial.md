@@ -305,3 +305,16 @@ After that:
 5. Run the code.
 
 ✅ It will deploy the model in the Supervisely platform as a REST API.
+
+Here is how advanced debug mode launch looks like:
+
+[https://github.com/supervisely-ecosystem/XMem/assets/91027877/6c07c37a-7b20-4e02-8fba-9f4fb5b98bef](https://user-images.githubusercontent.com/91027877/257574738-6c07c37a-7b20-4e02-8fba-9f4fb5b98bef.mp4)
+
+After advanced debug launch you must be able to debug your app via `Develop & Debug` app:
+
+[https://github.com/supervisely-ecosystem/XMem/assets/91027877/23198a4d-41cd-4ae7-a4e6-bba72c0da439](https://user-images.githubusercontent.com/91027877/257575433-23198a4d-41cd-4ae7-a4e6-bba72c0da439.mp4)
+
+
+
+
+
