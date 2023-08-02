@@ -1,11 +1,11 @@
-FROM supervisely/base-py-sdk:6.72.86
+FROM supervisely/base-py-sdk:6.72.87
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
-RUN pip3 install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
-RUN pip3 install torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
+RUN pip3 install torch==1.13.1+cu117 --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip3 install torchvision==0.14.1+cu117 --extra-index-url https://download.pytorch.org/whl/cu117
 
-RUN python3 -m pip install supervisely==6.72.86
+RUN python3 -m pip install supervisely==6.72.87
 
 RUN mkdir -p weights
 COPY XMem.pth /weights/
