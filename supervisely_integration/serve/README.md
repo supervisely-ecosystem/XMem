@@ -70,6 +70,9 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/b6dc0f9e-1822-4862-9c65-83aaf629fb05"/>
 
+Here is an example of creating input mask via Segment Anything Model and tracking this mask on multiple frames via XMem:
+
+https://user-images.githubusercontent.com/91027877/257788666-9469cf60-6f40-42b1-8bc4-78d0a9896380.mp4
 
 # XMem model framework
 
