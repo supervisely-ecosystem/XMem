@@ -74,7 +74,7 @@ class XMemTracker(sly.nn.inference.MaskTracking):
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
                 frame = torch.unsqueeze(frame, 0)
-                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
+                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="bilinear")
                 frame = frame.squeeze()
                 frame = frame.float().to(self.device) / 255
                 frame = im_normalization(frame)
