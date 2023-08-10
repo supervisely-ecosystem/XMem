@@ -5,5 +5,3 @@ git+https://github.com/cheind/py-thin-plate-spline
 hickle
 tensorboard
 numpy
-# supervisely==6.72.87
-git+https://github.com/supervisely/supervisely.git@global-lru-cache-for-frames
