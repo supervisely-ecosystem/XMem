@@ -15,7 +15,11 @@ from inference.interact.interactive_utils import index_numpy_to_one_hot_torch
 load_dotenv("supervisely_integration/serve/debug.env")
 load_dotenv(os.path.expanduser("~/supervisely.env"))
 
+os.environ["SMART_CACHE_TTL"] = str(5 * 60)
+os.environ["SMART_CACHE_SIZE"] = str(512)
+
 weights_location_path = "/weights/XMem.pth"
+
 
 class XMemTracker(sly.nn.inference.MaskTracking):
     def load_on_device(
@@ -43,9 +47,9 @@ class XMemTracker(sly.nn.inference.MaskTracking):
         self.model = self.model.to(self.device)
 
     def predict(
-            self,
-            frames: List[np.ndarray],
-            input_mask: np.ndarray,
+        self,
+        frames: List[np.ndarray],
+        input_mask: np.ndarray,
     ) -> List[np.ndarray]:
         # disable gradient calculation
         torch.set_grad_enabled(False)
@@ -64,7 +68,9 @@ class XMemTracker(sly.nn.inference.MaskTracking):
         resized_height = int(original_height / scaler)
         input_mask = torch.from_numpy(input_mask)
         input_mask = input_mask.view(1, 1, input_mask.shape[0], input_mask.shape[1])
-        input_mask = torch.nn.functional.interpolate(input_mask, (resized_height, resized_width), mode="nearest")
+        input_mask = torch.nn.functional.interpolate(
+            input_mask, (resized_height, resized_width), mode="nearest"
+        )
         input_mask = input_mask.squeeze().numpy()
         results = []
         # track input objects' masks
@@ -74,7 +80,9 @@ class XMemTracker(sly.nn.inference.MaskTracking):
                 frame = frame.transpose(2, 0, 1)
                 frame = torch.from_numpy(frame)
                 frame = torch.unsqueeze(frame, 0)
-                frame = torch.nn.functional.interpolate(frame, (resized_height, resized_width), mode="nearest")
+                frame = torch.nn.functional.interpolate(
+                    frame, (resized_height, resized_width), mode="nearest"
+                )
                 frame = frame.squeeze()
                 frame = frame.float().to(self.device) / 255
                 frame = im_normalization(frame)
@@ -92,7 +100,9 @@ class XMemTracker(sly.nn.inference.MaskTracking):
                 prediction = torch.argmax(prediction, dim=0)
                 prediction = prediction.cpu().to(torch.uint8)
                 prediction = prediction.view(1, 1, prediction.shape[0], prediction.shape[1])
-                prediction = torch.nn.functional.interpolate(prediction, (original_height, original_width), mode="nearest")
+                prediction = torch.nn.functional.interpolate(
+                    prediction, (original_height, original_width), mode="nearest"
+                )
                 prediction = prediction.squeeze().numpy()
                 # save predicted mask
                 results.append(prediction)
