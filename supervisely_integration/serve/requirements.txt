@@ -1,4 +1,4 @@
-supervisely==6.72.111
+supervisely==6.72.114
 # git+https://github.com/supervisely/supervisely.git@some-test-branch
 --extra-index-url https://download.pytorch.org/whl/cu117
 torch==1.13.1+cu117
