@@ -1,0 +1,9 @@
+services:
+  app:
+    image: supervisely/xmem:test
+    build: .
+    environment:
+      SERVER_ADDRESS: http://test
+      TASK_ID: 2
+      AUTOSTART: "true"
+      API_TOKEN: 4PvaQRE2nh7MAkVbmaANoT79mnShhXWbuLa9Ln5N4LVp3dJ5ZetpR4PEt72AHP3aSFy4RNeQePTEPybpua5EQggJeUtCfTgFE2dxQUWzvPJQu2upx4Ubm5VJidu52uJY
