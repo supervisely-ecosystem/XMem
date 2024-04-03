@@ -1,3 +1,5 @@
+git+https://github.com/supervisely/supervisely.git@bbox_tracking_debug
+
 progressbar2
 gdown
 gitpython
