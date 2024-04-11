@@ -1,4 +1,4 @@
-git+https://github.com/supervisely/supervisely.git@bbox_tracking_debug
+git+https://github.com/supervisely/supervisely.git@inference-improvements
 
 progressbar2
 gdown

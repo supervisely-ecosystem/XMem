@@ -9,7 +9,7 @@ COPY supervisely_integration/serve/requirements.txt /app/
 RUN pip install -r /app/requirements.txt
 
 COPY . /app
-RUN pip install git+https://github.com/supervisely/supervisely.git@bbox_tracking_debug
+RUN pip install git+https://github.com/supervisely/supervisely.git@inference-improvements
 
 EXPOSE 80
 
