@@ -1,4 +1,6 @@
-supervisely==6.73.76
+# supervisely==6.73.76
+git+https://github.com/supervisely/supervisely.git@inference-fixes-2
+
 progressbar2
 gdown
 gitpython
