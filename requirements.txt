@@ -1,4 +1,3 @@
-supervisely==6.73.76
 progressbar2
 gdown
 gitpython
