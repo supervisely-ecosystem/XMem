@@ -107,7 +107,8 @@ class XMemTracker(sly.nn.inference.MaskTracking):
                 # save predicted mask
                 results.append(prediction)
                 # update progress bar
-                self.video_interface._notify(task="mask tracking")
+                if hasattr(self, "video_interface"):
+                    self.video_interface._notify(task="mask tracking")
         return results
 
 
