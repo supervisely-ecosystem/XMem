@@ -2,7 +2,7 @@ import supervisely as sly
 import os
 from dotenv import load_dotenv
 from typing_extensions import Literal
-from typing import List
+from typing import Generator, List
 import numpy as np
 import torch
 from model.network import XMem
@@ -50,7 +50,7 @@ class XMemTracker(sly.nn.inference.MaskTracking):
         self,
         frames: List[np.ndarray],
         input_mask: np.ndarray,
-    ) -> List[np.ndarray]:
+    ) -> Generator[np.ndarray, None, None]:
         # disable gradient calculation
         torch.set_grad_enabled(False)
         # empty cache
@@ -72,7 +72,6 @@ class XMemTracker(sly.nn.inference.MaskTracking):
             input_mask, (resized_height, resized_width), mode="nearest"
         )
         input_mask = input_mask.squeeze().numpy()
-        results = []
         # track input objects' masks
         with torch.cuda.amp.autocast(enabled=True):
             for i, frame in enumerate(frames):
@@ -104,11 +103,11 @@ class XMemTracker(sly.nn.inference.MaskTracking):
                     prediction, (original_height, original_width), mode="nearest"
                 )
                 prediction = prediction.squeeze().numpy()
-                # save predicted mask
-                results.append(prediction)
                 # update progress bar
-                self.video_interface._notify(task="mask tracking")
-        return results
+                if hasattr(self, "video_interface") and self.video_interface is not None:
+                    self.video_interface._notify(task="mask tracking")
+                # save predicted mask
+                yield prediction
 
 
 model = XMemTracker()
