@@ -25,7 +25,7 @@
     "headless": true,
     "need_gpu": true,
     "gpu": "required",
-    "instance_version": "6.12.23",
+    "instance_version": "6.14.0",
     "session_tags": [
         "sly_video_tracking"
     ],
