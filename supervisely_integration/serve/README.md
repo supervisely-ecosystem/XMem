@@ -14,7 +14,7 @@ State-of-the-art Video Object Segmentation (VOS) integrated into Supervisely Vid
   <a href="#citation">Citation</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/supervisely-ecosystem/xmem/supervisely_integration/serve)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](../../../../supervisely-ecosystem/xmem/supervisely_integration/serve)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/XMem)
 [![views](https://app.supervisely.com/img/badges/views/supervisely-ecosystem/xmem/supervisely_integration/serve.png)](https://supervisely.com)
@@ -51,7 +51,7 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 0. This video object segmentation app is started by default in most cases by an instance administrator. If it isn't available in the video labeling tool, you can contact your Supervisely instance admin or run this app by yourself by following the steps below.
 
-1. Go to Ecosystem page and find the app [XMem Video Object Segmentation](https://ecosystem.supervisely.com/apps/xmem/supervisely_integration/serve).  
+1. Go to Ecosystem page and find the app [XMem Video Object Segmentation](../../../../supervisely-ecosystem/xmem/supervisely_integration/serve).  
 
 
 <img data-key="sly-module-link" data-module-slug="supervisely-ecosystem/xmem/supervisely_integration/serve" src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/bdcd22bc-b67a-4597-8b1c-4f9baa913717" width="500px" style='padding-bottom: 20px'/> 
@@ -69,7 +69,7 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/78a4a760-df76-4fcf-a6a0-049fa213e55f"/>
 
-5. Segment the object with any interactive segmentation model (e.g. [Segment Anything](https://ecosystem.supervisely.com/apps/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
+5. Segment the object with any interactive segmentation model (e.g. [Segment Anything](../../../../supervisely-ecosystem/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/b6dc0f9e-1822-4862-9c65-83aaf629fb05"/>
 
