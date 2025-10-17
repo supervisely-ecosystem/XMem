@@ -69,7 +69,7 @@ https://user-images.githubusercontent.com/7107196/177921527-7a1bd593-2162-4598-9
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/78a4a760-df76-4fcf-a6a0-049fa213e55f"/>
 
-5. Segment the object with any interactive segmentation model (e.g. [Segment Anything](../../../../supervisely-ecosystem/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
+5. Segment the object with any interactive segmentation model (e.g. [Segment Anything](https://ecosystem.supervisely.com/apps/serve-segment-anything-model)) and press `Track` button in `Video Annotator`.
 
 <img src="https://github.com/supervisely-ecosystem/XMem/assets/119248312/b6dc0f9e-1822-4862-9c65-83aaf629fb05"/>
 
