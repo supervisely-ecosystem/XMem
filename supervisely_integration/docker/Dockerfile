@@ -1,4 +1,6 @@
 FROM supervisely/xmem:1.0.2
 
 RUN pip3 install --upgrade setuptools==70.3.0
-RUN pip3 install supervisely==6.73.481
+RUN pip3 install supervisely==6.73.483
+
+LABEL python_sdk_version=6.73.483
