@@ -1,4 +1,5 @@
 import supervisely as sly
+from streaming_frames import use_streaming_frames
 import os
 from dotenv import load_dotenv
 from typing_extensions import Literal
@@ -113,4 +114,9 @@ class XMemTracker(sly.nn.inference.MaskTracking):
 
 
 model = XMemTracker()
+# Frames now come from the video in one streamed decode rather than one
+# videos.download-frame request each. Applied after construction, which is
+# what creates the cache it replaces. See streaming_frames.py for why.
+use_streaming_frames(model)
+
 model.serve()

@@ -1,1 +1,1 @@
-supervisely==6.73.486
+supervisely[video-av]==6.74.36
